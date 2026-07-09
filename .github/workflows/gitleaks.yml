@@ -1,10 +1,17 @@
 name: Gitleaks Scan
+
 on: [push, pull_request, workflow_dispatch]
+
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
+    # Explicitly grant token read permissions for the fork history
+    permissions:
+      contents: read
+      actions: read
     steps:
-      - uses: actions/checkout@v3
+      # Upgraded to v4 to prevent Node.js deprecation hangs
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@v2
