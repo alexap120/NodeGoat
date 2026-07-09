@@ -5,15 +5,15 @@ on:
 
 jobs:
   security:
-    # Sneaking past the traffic jam by targeting a specific older pool
-    runs-on: ubuntu-22.04
+    # Jumping the jammed Ubuntu queue completely by switching to macOS hardware
+    runs-on: macos-latest
     steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
 
-      - name: Install Trivy CLI Natively
+      - name: Install Trivy via Homebrew
         run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+          brew install trivy
 
       - name: Run Trivy Scan (console output)
         run: |
