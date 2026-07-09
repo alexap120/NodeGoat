@@ -5,17 +5,16 @@ on:
 
 jobs:
   security:
-    runs-on: ubuntu-latest
+    # Sneaking past the traffic jam by targeting a specific older pool
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v4
 
       - name: Install Trivy CLI Natively
-        # Pulls the official compiled Linux binary directly from Aqua Security
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
       - name: Run Trivy Scan (console output)
-        # Executes the file system scanner natively over the codebase
         run: |
           trivy fs --severity HIGH,CRITICAL --format table .
